@@ -1,0 +1,7 @@
+- Props is used to send the data from parent component to child component
+- State stores the data for that component
+- Render function is used to render the component
+- When the state is changed, the page is re-rendered including the child components
+i.e. the render function is called again.
+- L179: Lambda function is used to bind the current object to the onClick function call.
+  this.functionName = this.functionName.bind(this);
