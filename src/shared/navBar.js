@@ -2,6 +2,7 @@ import React from 'react';
 
 export function NavBar() {
     return (
-        <h1>ksjdnc</h1>
+        <h1>NavBar</h1>
+        
     )
 }

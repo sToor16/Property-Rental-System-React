@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
 import {NavBar} from './shared/navBar';
 import './App.css';
+import {PropertyCard} from "./components/propertyCard";
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <h1>Deleted basic react</h1>
-        <NavBar/>
+          <NavBar/>
+          <div className='row'>
+              <PropertyCard/>
+              <PropertyCard/>
+              <PropertyCard/>
+              <PropertyCard/>
+          </div>
       </div>
     );
   }
