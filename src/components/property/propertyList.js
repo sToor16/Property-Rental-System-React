@@ -7,13 +7,21 @@ export class PropertyList extends Component {
         super();
 
         this.state = {
-            properties: [1, 2, 3, 4]
+            properties: [{
+                id: "2",
+                propertyHeading: "Central Apartment",
+                propertyDetails: "Skyline Views",
+                propertyPrice: "340",
+                bedroom: "3"
+            }]
         }
     }
 
     renderProperties() {
-        return this.state.properties.map((property) => {
-            return <PropertyCard propertyHeading="Skyline Views" propertyName="Skyline Views" propertyPrice ="$240 per night" />
+        return this.state.properties.map((properties, index) => {
+            return (
+                <PropertyCard properties = {properties} key = {index} />
+            )
         })
     }
 
