@@ -1,23 +1,32 @@
 import React, {Component} from 'react';
-import {BrowserRouter, Route, Redirect} from 'react-router-dom'
+import {BrowserRouter, Redirect, Route} from 'react-router-dom';
+
+import {Provider} from 'react-redux';
 
 import {NavBar} from './shared/navBar';
-import {PropertyList} from "./components/property/propertyList";
-import {PropertyDetail} from "./components/property/propertyDetail";
+import PropertyList from "./components/property/property-listing/propertyList";
+import PropertyDetail from "./components/property/property-detail/propertyDetail";
 
 import './App.css';
+import { init} from "./reducers";
+
+const store = init();
 
 class App extends Component {
     render() {
         return (
-            <BrowserRouter>
-                <div className="App">
-                    <NavBar/>
-                    <Route exact path="/" render={() => { return <Redirect to={'/properties'}/> }}/>
-                    <Route exact path="/properties" component = {PropertyList}/>
-                    <Route exact path="/property/:id" component = {PropertyDetail}/>
-                </div>
-            </BrowserRouter>
+            <Provider store={store}>
+                <BrowserRouter>
+                    <div className="App">
+                        <NavBar/>
+                        <Route exact path="/" render={() => {
+                            return <Redirect to={'/properties'}/>
+                        }}/>
+                        <Route exact path="/properties" component={PropertyList}/>
+                        <Route exact path="/property/:id" component={PropertyDetail}/>
+                    </div>
+                </BrowserRouter>
+            </Provider>
         );
     }
 }
