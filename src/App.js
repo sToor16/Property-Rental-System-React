@@ -4,7 +4,7 @@ import {BrowserRouter, Redirect, Route} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
 import {NavBar} from './shared/navBar';
-import PropertyList from "./components/property/property-listing/propertyList";
+import PropertyListing from "./components/property/property-listing/propertyListing";
 import PropertyDetail from "./components/property/property-detail/propertyDetail";
 
 import './App.css';
@@ -22,7 +22,7 @@ class App extends Component {
                         <Route exact path="/" render={() => {
                             return <Redirect to={'/properties'}/>
                         }}/>
-                        <Route exact path="/properties" component={PropertyList}/>
+                        <Route exact path="/properties" component={PropertyListing}/>
                         <Route exact path="/property/:id" component={PropertyDetail}/>
                     </div>
                 </BrowserRouter>
