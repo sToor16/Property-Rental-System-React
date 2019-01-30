@@ -6,15 +6,12 @@ export function PropertyCard(props) {
 
     return (
         <div className='col-md-3 col-xs-6'>
-            <Link to={`/property/${property.id}`}>
+            <Link to={`/property/${property._id}`}>
                 <div className='card'>
                     <img src="http://via.placeholder.com/350x250"></img>
                     <div>
-                        <h6>{property.propertyHeading}</h6>
-                        <h4>{property.propertyName}</h4>
-                        <p>{property.propertyPrice}</p>
-                        <p>{property.bedroom}</p>
-                        <a href="">More Info</a>
+                        <h6>{property.city}</h6>
+                        <h4>{property.title}</h4>
                     </div>
                 </div>
             </Link>

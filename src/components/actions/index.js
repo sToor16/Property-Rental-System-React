@@ -1,51 +1,55 @@
-import {FETCH_PROPERTIES, FETCH_PROPERTY_BY_ID_INIT, FETCH_PROPERTY_BY_ID_SUCCESS} from "./types";
-
-const properties = [
-    {
-        id: "2",
-        propertyHeading: "Central Apartment",
-        propertyDetails: "Skyline Views",
-        propertyPrice: "340",
-        bedroom: "3"
-    },
-    {
-        id: "6",
-        propertyHeading: "Side Apartment",
-        propertyDetails: "Beach Views",
-        propertyPrice: "310",
-        bedroom: "1"
-    }
-];
+import axios from 'axios';
+import {
+    FETCH_PROPERTIES,
+    FETCH_PROPERTIES_SUCCESS,
+    FETCH_PROPERTY_BY_ID_INIT,
+    FETCH_PROPERTY_BY_ID_SUCCESS
+} from "./types";
 
 const fetchPropertyByIdInit = () => {
     return {
         type: FETCH_PROPERTY_BY_ID_INIT
 
     }
-}
+};
 
-
-export const fetchProperties = () => {
-
+const fetchPropertiesSuccess = (properties) => {
     return {
-        type: 'FETCH_PROPERTIES',
+        type: FETCH_PROPERTIES_SUCCESS,
         properties
     }
 };
 
 
-export const fetchPropertyById = (propertyId) => {
+export const fetchProperties = () => {
 
-    return function(dispatch){
-        dispatch(fetchPropertyByIdInit());
-        setTimeout(()=> {
-            const property = properties.find((property) => property.id === propertyId);
-            dispatch(fetchPropertyByIdSuccess(property));
-        }, 1000);
-
+    return dispatch => {
+        axios.get('http://localhost:3000/server/properties')
+            .then((res) => {
+                return res.data;
+            })
+            .then((properties) => {
+                dispatch(fetchPropertiesSuccess(properties))
+            })
     }
+
 };
 
+
+export const fetchPropertyById = (propertyId) => {
+
+    return function (dispatch) {
+        dispatch(fetchPropertyByIdInit());
+
+        axios.get(`http://localhost:3000/server/properties/${propertyId}`)
+            .then((res) => {
+                return res.data
+            })
+            .then((property) => {
+                dispatch(fetchPropertyByIdSuccess(property));
+            })
+    }
+};
 
 
 const fetchPropertyByIdSuccess = (property) => {
@@ -53,4 +57,4 @@ const fetchPropertyByIdSuccess = (property) => {
         type: FETCH_PROPERTY_BY_ID_SUCCESS,
         property
     }
-}
+};

@@ -12,9 +12,14 @@ class PropertyDetail extends Component {
 
     render() {
         const property = this.props.property;
-        if (property.id) {
+        console.log(property);
+        if (property._id) {
             return (
-                <div>{property.propertyHeading}</div>
+                <div>
+                    {property.category}<br/>
+                    {property.city}<br/>
+                    {property.title}
+                </div>
             )
         }
         else {
