@@ -5,13 +5,14 @@ class FakeDB {
         this.properties = [
             {
                 title: 'Nice view on ocean',
-                city: 'San Francisco',
-                street: 'Main Street',
-                category: 'condo',
+                city: 'Arlington',
+                street: '507 Summit Avenue',
+                category: 'Apartment',
                 image: 'http://via.placeholder.com/350x250',
                 bedrooms: 4,
                 description: 'Very nice apartment in center',
-                dailyRate: 43
+                dailyRate: 43,
+                shared: false
             },
             {
                 title: 'Nice view on City',
@@ -21,7 +22,8 @@ class FakeDB {
                 image: 'http://via.placeholder.com/350x250',
                 bedrooms: 2,
                 description: 'Very nice apartment in center',
-                dailyRate: 100
+                dailyRate: 100,
+                shared: true
             }];
     }
 

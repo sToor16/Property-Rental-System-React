@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions'
+import {PropertyAssets} from "./propertyAssets";
+import {PropertyInfo} from "./propertyInfo";
+import {MapWithGeoMarker} from "../../map/map";
+import {PropertyMap} from "./propertyMap";
 
 
 class PropertyDetail extends Component {
@@ -16,9 +20,17 @@ class PropertyDetail extends Component {
         if (property._id) {
             return (
                 <div>
-                    {property.category}<br/>
-                    {property.city}<br/>
-                    {property.title}
+                    <div className='row'>
+                        <div className='col-md-6'>
+                            <img src={property.image}></img><br/>
+                        </div>
+                        <div className='col-md-6'>
+                            <PropertyMap location={`${property.city}, ${property.street}`}/>
+                        </div>
+                    </div>
+
+                    <PropertyInfo property={property}/>
+                    <PropertyAssets/>
                 </div>
             )
         }
