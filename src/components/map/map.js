@@ -59,8 +59,8 @@ function withGeoCode(WrappedComponent) {
             });
         }
         getGeoCodedLocation() {
-            // const location = this.props.location;
-            const location = 'test';
+            const location = this.props.location;
+            //const location = 'test';
             if(this.googleMapCaching.isValueCached(location)){
                 this.setState({coordinates: this.googleMapCaching.getLocationCacheValue(location)})
             } else {
