@@ -1,9 +1,8 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as actions from '../../actions'
 import {PropertyAssets} from "./propertyAssets";
 import {PropertyInfo} from "./propertyInfo";
-import {MapWithGeoMarker} from "../../map/map";
 import {PropertyMap} from "./propertyMap";
 
 

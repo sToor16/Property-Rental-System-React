@@ -3,19 +3,19 @@ import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
-    Marker,
+    Marker
 } from "react-google-maps";
 
 function MapComponent(props) {
     const coordinates = props.coordinates;
     return (
         <GoogleMap
-            defaultZoom={8}
+            defaultZoom={13}
             defaultCenter={coordinates}
             center={coordinates}
         >
             <Marker
-                position={coordinates}
+                radius={500}
             />
         </GoogleMap>
     )
@@ -23,6 +23,7 @@ function MapComponent(props) {
 
 function withGeoCode(WrappedComponent) {
     return class extends React.Component {
+
         constructor() {
             super();
             this.state = {
@@ -32,21 +33,24 @@ function withGeoCode(WrappedComponent) {
                 }
             }
         }
+
         componentWillMount() {
             this.getGeoCodeLocation();
         }
+
         getGeoCodeLocation() {
             const location = this.props.location;
             const geocoder = new window.google.maps.Geocoder();
+
             geocoder.geocode({address: location}, (result, status) => {
+
                 if (status ==='OK') {
                     const geometry = result[0].geometry.location;
-                    const coordinates = {
-                        lat: geometry.lat(), lng: geometry.lng()};
+                    const coordinates = { lat: geometry.lat(), lng: geometry.lng()};
 
                     this.setState({
                         coordinates
-                    })
+                    });
                 }
             });
         }
