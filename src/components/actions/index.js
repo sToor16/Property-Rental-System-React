@@ -1,6 +1,5 @@
 import axios from 'axios';
 import {
-    FETCH_PROPERTIES,
     FETCH_PROPERTIES_SUCCESS,
     FETCH_PROPERTY_BY_ID_INIT,
     FETCH_PROPERTY_BY_ID_SUCCESS

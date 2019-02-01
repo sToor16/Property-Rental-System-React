@@ -11,6 +11,7 @@ export class PropertyMap extends Component {
                 loadingElement={<div style={{ height: `100%` }} />}
                 containerElement={<div style={{ height: `300px` }} />}
                 mapElement={<div style={{ height: `100%` }} />}
+                location={location}
             />
         )
     }

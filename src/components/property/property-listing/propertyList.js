@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {PropertyCard} from "./propertyCard";
-import * as actions from '../../actions'
 
 export class PropertyList extends Component {
 
