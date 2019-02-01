@@ -15,7 +15,6 @@ class PropertyDetail extends Component {
 
     render() {
         const property = this.props.property;
-        console.log(property);
         if (property._id) {
             return (
                 <div>

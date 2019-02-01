@@ -3,8 +3,9 @@ import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
-    Marker
+    Marker, InfoWindow
 } from "react-google-maps";
+import {GoogleMapCaching} from "../../services/GoogleMapCaching";
 
 function MapComponent(props) {
     const coordinates = props.coordinates;
@@ -14,9 +15,12 @@ function MapComponent(props) {
             defaultCenter={coordinates}
             center={coordinates}
         >
-            <Marker
-                radius={500}
-            />
+            <Marker position={ coordinates }/>
+            <InfoWindow position={ coordinates }>
+                <div>
+                    Oops, There was a problem finding the location!!
+                </div>
+            </InfoWindow>
         </GoogleMap>
     )
 }
@@ -26,6 +30,7 @@ function withGeoCode(WrappedComponent) {
 
         constructor() {
             super();
+            this.googleMapCaching = new GoogleMapCaching();
             this.state = {
                 coordinates: {
                     lat: 0,
@@ -35,24 +40,39 @@ function withGeoCode(WrappedComponent) {
         }
 
         componentWillMount() {
-            this.getGeoCodeLocation();
+            this.getGeoCodedLocation();
         }
-
-        getGeoCodeLocation() {
-            const location = this.props.location;
+        getGeoCodeLocation(location){
             const geocoder = new window.google.maps.Geocoder();
+            return new Promise((resolve, reject) => {
+                geocoder.geocode({address: location}, (result, status) => {
 
-            geocoder.geocode({address: location}, (result, status) => {
-
-                if (status ==='OK') {
-                    const geometry = result[0].geometry.location;
-                    const coordinates = { lat: geometry.lat(), lng: geometry.lng()};
-
-                    this.setState({
-                        coordinates
-                    });
-                }
+                    if (status ==='OK') {
+                        const geometry = result[0].geometry.location;
+                        const coordinates = { lat: geometry.lat(), lng: geometry.lng()};
+                        this.googleMapCaching.locationCacheValue(location, coordinates);
+                        resolve(coordinates);
+                    } else {
+                        reject('Could not load the provided Location.')
+                    }
+                });
             });
+        }
+        getGeoCodedLocation() {
+            // const location = this.props.location;
+            const location = 'test';
+            if(this.googleMapCaching.isValueCached(location)){
+                this.setState({coordinates: this.googleMapCaching.getLocationCacheValue(location)})
+            } else {
+                this.getGeoCodeLocation(location).then(
+                    (coordinates) => {
+                        this.setState({coordinates});
+                    },
+                    (error) => {
+                        console.log("ERROR!!");
+                    }
+                );
+            }
         }
         render() {
             return (

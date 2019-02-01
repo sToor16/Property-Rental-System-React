@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {MapWithGeoMarker} from "../../map/map";
-import { GOOGLE_API_KEY } from "../../../../server/config/config"
+import { GOOGLE_API_KEY } from "../../../config/config"
 
 export class PropertyMap extends Component {
 
